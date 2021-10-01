@@ -1,0 +1,113 @@
+{
+    "supported": {
+        "n64": "Nintendo 64",
+        "nes": "NES",
+        "snes": "SNES",
+        "sms": "Sega Master System",
+        "smd": "Sega Mega Drive/Genesis",
+        "gamecube": "GameCube",
+        "ps1": "PlayStation 1",
+        "ps2": "PlayStation 2",
+        "n3ds": "Nintendo 3DS",
+        "switch": "Nintendo Switch",
+        "wiiu": "Nintendo WiiU"
+    },
+    "n64": {
+        "platform": "Nintendo 64",
+        "logo": "/n64.png",
+        "path": "E:\\ROMs\\N64",
+        "last_scanned": 1633114997640,
+        "meta": "http://localhost:3000"
+    },
+    "nes": {
+        "platform": "Nintendo Entertainment System",
+        "logo": "/nes.png",
+        "path": "E:\\ROMs\\NES",
+        "last_scanned": 1633114997640,
+        "meta": "http://localhost:3000"
+    },
+    "snes": {
+        "platform": "Super Nintendo Entertainment System",
+        "logo": "/snes.png",
+        "path": "E:\\ROMs\\SNES",
+        "last_scanned": 1633114997640,
+        "meta": "http://localhost:3000"
+    },
+    "sms": {
+        "platform": "Sega Master System",
+        "logo": "/sms.png",
+        "path": "E:\\ROMs\\MasterSystem",
+        "last_scanned": 1633114997640,
+        "meta": "http://localhost:3000"
+    },
+    "smd": {
+        "platform": "Sega Mega Drive",
+        "logo": "/smd.png",
+        "path": "E:\\ROMs\\MegaDrive",
+        "last_scanned": 1633114997640,
+        "meta": "http://localhost:3000"
+    },
+    "dreamcast": {
+        "platform": "Sega Dreamcast",
+        "logo": "/dreamcast.png",
+        "path": null,
+        "last_scanned": 1633114997640,
+        "meta": "http://localhost:3000"
+    },
+    "gamecube": {
+        "platform": "Nintendo Gamecube",
+        "logo": "/gamecube.png",
+        "path": "E:\\ROMs\\GameCube",
+        "last_scanned": 1633114997640,
+        "meta": "http://localhost:3000"
+    },
+    "ps1": {
+        "platform": "PlayStation 1",
+        "logo": "/ps1.png",
+        "path": "E:\\ROMs\\PS1",
+        "last_scanned": 1633114997640,
+        "meta": "http://localhost:3000"
+    },
+    "ps2": {
+        "platform": "PlayStation 2",
+        "logo": "/ps2.png",
+        "path": "E:\\ROMs\\PS2",
+        "last_scanned": 1633114997640,
+        "meta": "http://localhost:3000"
+    },
+    "nds": {
+        "platform": "Nintendo DS",
+        "logo": "/nds.png",
+        "path": null,
+        "last_scanned": 1633114997640,
+        "meta": "http://localhost:3000"
+    },
+    "n3ds": {
+        "platform": "Nintendo 3DS",
+        "logo": "/n3ds.png",
+        "path": "E:\\ROMs\\3DS",
+        "last_scanned": 1633114997640,
+        "meta": "http://localhost:3000"
+    },
+    "switch": {
+        "platform": "Nintendo Switch",
+        "logo": "/switch.png",
+        "path": "E:\\ROMs\\Switch",
+        "last_scanned": 1633114997640,
+        "meta": "http://localhost:3000"
+    },
+    "wii": {
+        "platform": "Nintendo Wii",
+        "logo": "/wii.png",
+        "path": "null",
+        "last_scanned": 1633114997640,
+        "meta": "http://localhost:3000"
+    },
+    "wiiu": {
+        "platform": "Nintendo WiiU",
+        "logo": "/wiiu.png",
+        "path": "E:\\ROMs\\WiiU",
+        "last_scanned": 1633114997640,
+        "meta": "http://localhost:3000"
+    }
+}
