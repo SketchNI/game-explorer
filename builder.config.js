@@ -42,9 +42,9 @@ const macOS = {
 }
 
 module.exports = {
-  productName: 'game-explorer',
+  productName: 'Game Explorer',
   appId: 'com.sketchni.gameexplorer',
-  artifactName: 'setup-${version}.${ext}',
+  artifactName: 'setup-game-explorer-${version}.${ext}',
   directories: {
     output: 'build'
   },

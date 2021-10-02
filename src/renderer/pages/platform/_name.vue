@@ -13,7 +13,7 @@
         </div>
 
         <div v-else>
-            <div class="flex items-center justify-end">
+            <div class="flex items-center justify-end mb-4">
                 <button @click="setView('Grid')" :class="`focus:outline-none view ${view === 'Grid' ? 'active' : ''}`">
                     <i class="fas fa-th"/> Grid
                 </button>
@@ -23,13 +23,15 @@
             </div>
 
             <div class="game-center w-full">
-                <div class="grid grid-cols-3 gap-4" v-if="view === 'Grid'">
+                <div class="grid grid-cols-5 gap-4" v-if="view === 'Grid'">
+                    <GameCard :grid="true" :game="{platform: this.$route.params.name, id: 5, name: 'Banjo-Kazooie', year: '1998', publisher: 'Rareware', img: 'https://www.mobygames.com/images/covers/l/17730-banjo-kazooie-nintendo-64-front-cover.jpg' }" />
                     <div v-for="rom in roms.path" class="rom-card">
                         {{ rom }}
                     </div>
                 </div>
 
                 <div class="flex flex-col space-y-4" v-if="view === 'List'">
+                    <GameCard :grid="false" :game="{platform: this.$route.params.name, id: 5, name: 'Banjo-Kazooie', year: '1998', publisher: 'Rareware', img: 'https://www.mobygames.com/images/covers/l/17730-banjo-kazooie-nintendo-64-front-cover.jpg' }" />
                     <div v-for="rom in roms.path" class="rom-card">
                         {{ rom }}
                     </div>
@@ -43,9 +45,11 @@
 import Vue from 'vue'
 import Loader from '../../components/Loader'
 import platform from '~/src/utils/resolver/platform'
+import GameCard from '../../components/GameCard'
+import read from '~/src/utils/resolver/parse-rom';
 
 export default Vue.extend({
-    components: { Loader },
+    components: { GameCard, Loader },
     data () {
         return {
             loading: true,
@@ -55,20 +59,28 @@ export default Vue.extend({
     },
 
     created () {
+        if ( !localStorage.getItem('view') ) {
+            this.view = 'Grid';
+            localStorage.setItem('view', 'Grid');
+        }
+        this.view = localStorage.getItem('view');
         this.collect(this.$route.params.name)
+
+        console.log(this.roms.path);
+        read(this.$route.params.name, this.roms.path[0]);
     },
 
     methods: {
         setView (view) {
             if ( view === 'Grid' || view === 'List') {
                 this.view = view;
+                localStorage.setItem('view', view);
             }
         },
 
         collect (p) {
             if ( this.roms.path !== null ) {
                 this.roms = platform(p)
-                console.log(this.roms);
             } else {
                 throw Error("Not Found");
             }
