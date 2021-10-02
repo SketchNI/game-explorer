@@ -8,7 +8,7 @@ module.exports = {
     // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
     ssr: false,
     target: 'static',
-    loading: false,
+    loading: true,
 
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
@@ -41,8 +41,11 @@ module.exports = {
             },
             {
                 rel: 'stylesheet',
-                // eslint-disable-next-line max-len
                 href: 'https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,400&display=swap'
+            },
+            {
+                rel: 'stylesheet',
+                href: '/global.css'
             },
             {
                 rel: 'icon',
@@ -58,6 +61,10 @@ module.exports = {
             {
                 defer: true,
                 src: "/solid.min.js"
+            },
+            {
+                defer: true,
+                src: "/regular.min.js"
             },
             {
                 defer: true,
@@ -89,12 +96,12 @@ module.exports = {
     modules: [
         // https://go.nuxtjs.dev/axios
         '@nuxtjs/axios',
-        // https://go.nuxtjs.dev/pwa
-        '@nuxtjs/pwa',
     ],
 
     // Axios module configuration: https://go.nuxtjs.dev/config-axios
-    axios: {},
+    axios: {
+
+    },
 
     // PWA module configuration: https://go.nuxtjs.dev/pwa
     pwa: {

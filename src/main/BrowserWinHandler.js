@@ -43,6 +43,10 @@ export default class BrowserWinHandler {
         }
         this.browserWindow = new BrowserWindow(
             {
+                minWidth: 800,
+                minHeight: 600,
+                backgroundColor: '#262626',
+                //frame: false,
                 ...this.options,
                 webPreferences: {
                     ...this.options.webPreferences,

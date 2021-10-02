@@ -3,6 +3,7 @@
         <div class="sidebar-top">
             <h1 class="text-3xl mb-4 text-center">
                 <nuxt-link to="/">
+                    <i class="fas fa-house-damage mr-2" />
                     <span class="font-bold">GAME</span><span class="font-thin">XPlorer</span>
                 </nuxt-link>
             </h1>
@@ -15,39 +16,31 @@
             <div class="console-list">
                 <ul class="console">
                     <li v-for="(v, k) in supported">
-                        <nuxt-link class="link" exact exact-active-class="active" :to="`/platform/${k}`">{{ v }}</nuxt-link>
+                        <nuxt-link class="link" exact exact-active-class="active" :to="`/platform/${k}`">
+                            <i class="fas fa-gamepad mr-2" />
+                            {{ v }}
+                        </nuxt-link>
                     </li>
-<!--                    <li><nuxt-link class="link" exact exact-active-class="active" to="/platform/nes">NES</nuxt-link></li>
-                    <li><nuxt-link class="link" exact exact-active-class="active" to="/platform/snes">SNES</nuxt-link></li>
-                    <li><nuxt-link class="link" exact exact-active-class="active" to="/platform/sms">Sega Master System</nuxt-link></li>
-                    <li><nuxt-link class="link" exact exact-active-class="active" to="/platform/smd">Sega Mega Drive/Genesis</nuxt-link></li>
-                    <li><nuxt-link class="link" exact exact-active-class="active" to="/platform/dreamcast">Dreamcast</nuxt-link></li>
-                    <li><nuxt-link class="link" exact exact-active-class="active" to="/platform/platform">Nintendo 64</nuxt-link></li>
-                    <li><nuxt-link class="link" exact exact-active-class="active" to="/platform/gamecube">Gamecube</nuxt-link></li>
-                    <li><nuxt-link class="link" exact exact-active-class="active" to="/platform/ps1">Playstation 1</nuxt-link></li>
-                    <li><nuxt-link class="link" exact exact-active-class="active" to="/platform/ps2">Playstation 2</nuxt-link></li>
-                    <li><nuxt-link class="link" exact exact-active-class="active" to="/platform/nds">Nintendo DS</nuxt-link></li>
-                    <li><nuxt-link class="link" exact exact-active-class="active" to="/platform/n3ds">Nintendo 3DS</nuxt-link></li>
-                    <li><nuxt-link class="link" exact exact-active-class="active" to="/platform/switch">Nintendo Switch</nuxt-link></li>
-                    <li><nuxt-link class="link" exact exact-active-class="active" to="/platform/wii">Nintendo Wii</nuxt-link></li>
-                    <li><nuxt-link class="link" exact exact-active-class="active" to="/platform/wiiu">Nintendo WiiU</nuxt-link></li>-->
                 </ul>
             </div>
-        </div>
 
-        <div class="absolute left-4 right-4 mb-8 bottom-0 top-auto sidebar-footer">
-            <nuxt-link to="/settings">Settings</nuxt-link>
+            <Border />
+            <nuxt-link class="link" exact exact-active-class="active" to="/settings">
+                <i class="fas fa-cogs mr-2" />
+                Settings
+            </nuxt-link>
         </div>
     </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import Border from '~/components/Border.vue'
 const config = require('../../config.json');
 
 export default Vue.extend({
     name: "sidebar",
-
+    components: { Border },
     data() {
         return {
             supported: [],
@@ -62,7 +55,7 @@ export default Vue.extend({
 
 <style scoped>
 .sidebar {
-    @apply bg-gray-900 h-screen w-2/12 text-gray-200 shadow-lg px-4 py-8;
+    @apply bg-gray-900 h-screen w-80 text-gray-300 shadow-lg px-4 py-8 overflow-y-auto;
 }
 
 #search {

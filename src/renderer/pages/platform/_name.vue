@@ -23,17 +23,15 @@
             </div>
 
             <div class="game-center w-full">
-                <div class="grid grid-cols-5 gap-4" v-if="view === 'Grid'">
-                    <GameCard :grid="true" :game="{platform: this.$route.params.name, id: 5, name: 'Banjo-Kazooie', year: '1998', publisher: 'Rareware', img: 'https://www.mobygames.com/images/covers/l/17730-banjo-kazooie-nintendo-64-front-cover.jpg' }" />
+                <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" v-if="view === 'Grid'">
                     <div v-for="rom in roms.path" class="rom-card">
-                        {{ rom }}
+                        <GameCard :grid="true" :game_name="filter(rom)" />
                     </div>
                 </div>
 
                 <div class="flex flex-col space-y-4" v-if="view === 'List'">
-                    <GameCard :grid="false" :game="{platform: this.$route.params.name, id: 5, name: 'Banjo-Kazooie', year: '1998', publisher: 'Rareware', img: 'https://www.mobygames.com/images/covers/l/17730-banjo-kazooie-nintendo-64-front-cover.jpg' }" />
                     <div v-for="rom in roms.path" class="rom-card">
-                        {{ rom }}
+                        <GameCard :grid="false" :game_name="filter(rom)" />
                     </div>
                 </div>
             </div>
@@ -46,7 +44,7 @@ import Vue from 'vue'
 import Loader from '../../components/Loader'
 import platform from '~/src/utils/resolver/platform'
 import GameCard from '../../components/GameCard'
-import read from '~/src/utils/resolver/parse-rom';
+import read from '~/src/utils/resolver/parse-rom'
 
 export default Vue.extend({
     components: { GameCard, Loader },
@@ -58,6 +56,12 @@ export default Vue.extend({
         }
     },
 
+    head() {
+        return {
+            title: `${this.roms.data.platform} - Game Explorer`
+        }
+    },
+
     created () {
         if ( !localStorage.getItem('view') ) {
             this.view = 'Grid';
@@ -66,7 +70,6 @@ export default Vue.extend({
         this.view = localStorage.getItem('view');
         this.collect(this.$route.params.name)
 
-        console.log(this.roms.path);
         read(this.$route.params.name, this.roms.path[0]);
     },
 
@@ -86,6 +89,11 @@ export default Vue.extend({
             }
             this.loading = false
 
+        },
+
+        filter(name) {
+            let rom = name.split('(')[0];
+            return rom.toLowerCase();
         }
     }
 })

@@ -1,13 +1,17 @@
 <template>
     <div class="h-screen w-full">
         <div class="flex items-top">
-            <sidebar class="border-r border-black"/>
+            <div class="w-80">
+                <sidebar class="border-r border-black"/>
+            </div>
 
-            <main class="main" id="main">
-                <div class="main-wrap flex flex-col">
-                    <Nuxt/>
-                </div>
-            </main>
+            <div class="bg-gray-800 flex-grow">
+                <main class="main" id="main">
+                    <div class="main-wrap flex flex-col">
+                        <Nuxt/>
+                    </div>
+                </main>
+            </div>
         </div>
     </div>
 </template>
@@ -25,10 +29,20 @@ export default Vue.extend({
 
 <style scoped>
 .main {
-    @apply bg-gray-800 h-screen w-full -mb-48 text-gray-100;
+    @apply h-screen text-gray-100;
 }
 
 .main-wrap {
-    @apply overflow-y-scroll p-8 h-full;
+    @apply overflow-y-auto p-8 h-full;
+}
+
+.minmax {
+    @apply text-white px-3 py-1 hover:bg-gray-600 text-xs cursor-pointer focus:outline-none;
+    @apply transition duration-150 ease-in;
+}
+
+.close {
+    @apply hover:bg-red-600 text-white;
+    @apply transition duration-150 ease-in;
 }
 </style>
