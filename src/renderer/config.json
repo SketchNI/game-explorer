@@ -12,6 +12,13 @@
         "switch": "Nintendo Switch",
         "wiiu": "Nintendo WiiU"
     },
+    "emulators": {
+        "retroarch": {
+            "executable": "retroarch.exe",
+            "path": "C:\\RetroArch-Win64",
+            "cores": "C:\\RetroArch-Win64\\cores"
+        }
+    },
     "n64": {
         "platform": "Nintendo 64",
         "logo": "/n64.png",

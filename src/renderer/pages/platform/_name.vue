@@ -25,13 +25,13 @@
             <div class="game-center w-full">
                 <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" v-if="view === 'Grid'">
                     <div v-for="rom in roms.path" class="rom-card">
-                        <GameCard :grid="true" :game_name="filter(rom)" />
+                        <GameCard :grid="true" :game_path="`${roms.data.path}/${rom}`" :game_name="filter(rom)" />
                     </div>
                 </div>
 
                 <div class="flex flex-col space-y-4" v-if="view === 'List'">
                     <div v-for="rom in roms.path" class="rom-card">
-                        <GameCard :grid="false" :game_name="filter(rom)" />
+                        <GameCard :grid="false" :game_path="`${roms.data.path}/${rom}`" :game_name="filter(rom)" />
                     </div>
                 </div>
             </div>

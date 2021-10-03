@@ -1,51 +1,29 @@
 <template>
-    <div v-if="!game_not_found">
-        <nuxt-link v-if="grid" :to="`/platform/${game.platform}/game/${game.id}`" class="game-card block">
-            <div class="mb-4">
-                <img :src="game.image_url" alt="Banjo-Kazooie Box Art" class="rounded-t-lg"/>
-            </div>
+    <div>
+        <div v-if="loading">
+            <Loader/>
+        </div>
+        <div v-else>
+            <div v-if="!game_not_found">
+                <div v-if="grid" class="game-card block p-4">
+                    <div class="mb-4 -m-4 h-64 overflow-y-hidden rounded-t-lg">
+                        <img :src="game.image_url" :alt="`${game.name} Box Art`" class="w-96 rounded-t-lg"/>
+                    </div>
 
-            <div class="font-bold text-gray-300 text-2xl p-4 pt-0">
-                {{ game.name }}
-            </div>
-
-            <div class="text-gray-500 px-4">
-                {{ game.description }}
-            </div>
-
-            <Border/>
-
-            <div class="p-4 pt-0">
-                <span>
-                    <span class="text-gray-500">Published in</span>
-                    {{ game.published }}
-                </span>
-
-                <span>
-                    <span class="text-gray-500">by</span>
-                    {{ game.publisher.name }}
-                </span>
-            </div>
-        </nuxt-link>
-
-        <nuxt-link v-else-if="!grid" :to="`/platform/${game.platform}/game/${game.id}`" class="game-card block">
-            <div class="flex items-center flex-row">
-                <div class="mr-4">
-                    <img :src="game.image_url" alt="Banjo-Kazooie Box Art" class="w-72 rounded-l-lg">
-                </div>
-
-                <div>
-                    <div class="font-bold text-gray-300 text-2xl">
+                    <div class="font-bold text-gray-400 text-xl pt-0">
                         {{ game.name }}
                     </div>
 
-                    <div class="text-gray-500">
+                    <div class="text-gray-500 bg-gray-900 h-24 overflow-y-auto">
                         {{ game.description }}
                     </div>
 
+                    <LaunchButton :game_path="game_path" :game_name="game.name" :platform="game.console.slug"
+                                  :grid="grid"/>
+
                     <Border/>
 
-                    <div class="">
+                    <div class="bg-gray-900 text-gray-400">
                         <span>
                             <span class="text-gray-500">Published in</span>
                             {{ game.published }}
@@ -57,64 +35,82 @@
                         </span>
                     </div>
                 </div>
-            </div>
-        </nuxt-link>
-    </div>
 
-    <div v-else-if="game_not_found" class="game-card">
-        <div v-if="grid">
-            <div class="mb-4">
-                <img src="/no_image.png" alt="No Box Art" class="rounded-l-lg">
-            </div>
+                <div v-else-if="!grid" class="game-card block">
+                    <div class="grid grid-cols-5">
+                        <div class="col-span-1">
+                            <img :src="game.image_url" :alt="`${game.name} Box Art`" class="list-image rounded-l-lg">
+                        </div>
 
-            <div class="font-bold text-gray-300 text-2xl p-4 pt-0">
-                {{ game_name }}
-            </div>
+                        <div class="col-span-4 p-4">
+                            <div class="font-bold text-gray-400 text-xl">
+                                {{ game.name }}
+                            </div>
 
-            <div class="text-gray-500 px-4">
+                            <div class="text-gray-500">
+                                {{ game.description }}
+                            </div>
 
-            </div>
+                            <LaunchButton :game_path="game_path" :game_name="game.name" :platform="game.console.slug"
+                                          :grid="grid"/>
 
-            <Border/>
+                            <Border/>
 
-            <div class="p-4 pt-0">
-                <span>
-                    <span class="text-gray-500">Published in</span>
-                    N/A
-                </span>
+                            <div class="text-gray-400">
+                                <span>
+                                    <span class="text-gray-500">Published in</span>
+                                    {{ game.published }}
+                                </span>
 
-                <span>
-                    <span class="text-gray-500">by</span>
-                    N/A
-                </span>
-            </div>
-        </div>
-        <div v-else>
-            <div class="flex items-center flex-row">
-                <div class="mr-4">
-                    <img src="/no_image.png" alt="No Box Art" class="w-72 rounded-l-lg">
+                                <span>
+                                    <span class="text-gray-500">by</span>
+                                    {{ game.publisher.name }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
 
-                <div>
-                    <div class="font-bold text-gray-300 text-2xl p-4 pt-0">
+            <div v-else-if="game_not_found" class="game-card">
+                <div v-if="grid" class="p-4">
+                    <div class="mb-4 -m-4 h-64 overflow-y-hidden rounded-t-lg">
+                        <img src="/no_image.png" alt="No Box Art" class="w-96 rounded-t-lg">
+                    </div>
+
+                    <div class="font-bold text-gray-400 text-xl">
                         {{ game_name }}
                     </div>
 
-                    <div class="text-gray-500 px-4" />
-
+                    <LaunchButton :game_path="game_path" :game_name="game.name" :platform="game.console.slug"
+                                  :grid="grid"/>
 
                     <Border/>
 
-                    <div class="p-4 pt-0">
-                        <span>
-                            <span class="text-gray-500">Published in</span>
-                        N/A
-                        </span>
+                    <div class="text-gray-500">
+                        No meta information available.
+                    </div>
+                </div>
+                <div v-else>
+                    <div class="grid grid-cols-5">
+                        <div class="col-span-1">
+                            <img src="/no_image.png" alt="No Box Art" class="w-72 rounded-l-lg">
+                        </div>
 
-                        <span>
-                            <span class="text-gray-500">by</span>
-                            N/A
-                        </span>
+                        <div class="col-span-4 py-4">
+                            <div class="font-bold text-gray-400 text-xl">
+                                {{ game_name }}
+                            </div>
+
+                            <LaunchButton :game_path="game_path" :game_name="game.name" :platform="game.console.slug"
+                                      :grid="grid"/>
+
+                            <Border/>
+
+                            <div class="text-gray-500">
+                                No meta information available.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -123,17 +119,19 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import Border from '~/components/Border.vue'
 import Loader from '~/components/Loader.vue'
+import LaunchButton from '~/components/LaunchButton'
+import crypto from 'crypto'
 
-export default Vue.extend({
+export default {
     name: 'GameCard',
     components: {
+        LaunchButton,
         Border,
         Loader
     },
-    props: ['grid', 'game_name'],
+    props: ['grid', 'game_name', 'game_path'],
 
     data () {
         return {
@@ -171,24 +169,49 @@ export default Vue.extend({
 
     methods: {
         getGame () {
-            this.$axios.get(`http://localhost/api/game/${this.game_name}`).then(res => {
-                this.game = res.data
-                this.game.published = new Date(this.game.published).getFullYear()
+            if (!localStorage.getItem(this.name_hash)) {
+                this.$axios.get(`https://gameexplorer.sketchni.codes/api/game/${this.game_name}`).then(res => {
+                    this.game = res.data
+                    this.game.published = new Date(this.game.published).getFullYear()
+
+                    this.writeToStorage(this.name_hash, this.game)
+
+                    this.loading = false
+                }).catch((e) => {
+                    this.game_not_found = true
+                    this.loading = false
+                })
+            } else {
+                this.readFromStorage(this.name_hash)
                 this.loading = false
-            }).catch(() => {
-                this.game_not_found = true
-            })
+            }
+        },
+
+        writeToStorage (hash, data) {
+            localStorage.setItem(hash, JSON.stringify(data))
+        },
+
+        readFromStorage (hash) {
+            this.game = JSON.parse(localStorage.getItem(hash))
         }
     },
-})
+
+    computed: {
+        name_hash: function () {
+            let hasher = crypto.createHash('sha1')
+            hasher.update(this.game_name)
+            return hasher.digest('hex')
+        }
+    }
+}
 </script>
 
 <style scoped>
 .game-card {
-    @apply shadow-md bg-gray-900 rounded-lg border border-gray-900;
+    @apply shadow-md bg-gray-900 rounded-lg border border-gray-900 cursor-pointer;
 }
 
-a:hover {
+.game-card:hover {
     @apply ring ring-purple-500 ring-opacity-60;
     @apply transition duration-150 ease-in;
 }
