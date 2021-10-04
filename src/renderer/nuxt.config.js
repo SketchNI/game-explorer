@@ -44,10 +44,6 @@ module.exports = {
                 href: 'https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,400&display=swap'
             },
             {
-                rel: 'stylesheet',
-                href: '/global.css'
-            },
-            {
                 rel: 'icon',
                 type: 'image/x-icon',
                 href: '/favicon.ico'
@@ -74,7 +70,9 @@ module.exports = {
     },
 
     // Global CSS: https://go.nuxtjs.dev/config-css
-    css: [],
+    css: [
+        "~/assets/global.css",
+    ],
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: [

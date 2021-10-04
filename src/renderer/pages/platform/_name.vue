@@ -23,15 +23,22 @@
             </div>
 
             <div class="game-center w-full">
-                <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" v-if="view === 'Grid'">
-                    <div v-for="rom in roms.path" class="rom-card">
-                        <GameCard :grid="true" :game_path="`${roms.data.path}/${rom}`" :game_name="filter(rom)" />
+                <div v-if="roms.path.length > 0">
+                    <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" v-if="view === 'Grid'">
+                        <div v-for="rom in roms.path" class="rom-card">
+                            <GameCard :grid="true" :game_path="`${roms.data.path}/${rom}`" :game_name="filter(rom)"/>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col space-y-4" v-if="view === 'List'">
+                        <div v-for="rom in roms.path" class="rom-card">
+                            <GameCard :grid="false" :game_path="`${roms.data.path}/${rom}`" :game_name="filter(rom)"/>
+                        </div>
                     </div>
                 </div>
-
-                <div class="flex flex-col space-y-4" v-if="view === 'List'">
-                    <div v-for="rom in roms.path" class="rom-card">
-                        <GameCard :grid="false" :game_path="`${roms.data.path}/${rom}`" :game_name="filter(rom)" />
+                <div v-if="roms.path.length === 0">
+                    <div class="bg-orange-500 rounded-lg bg-opacity-60 text-xl text-white shadow-lg px-6 py-4">
+                        No ROMs found.
                     </div>
                 </div>
             </div>
@@ -47,7 +54,10 @@ import GameCard from '../../components/GameCard'
 import read from '~/src/utils/resolver/parse-rom'
 
 export default Vue.extend({
-    components: { GameCard, Loader },
+    components: {
+        GameCard,
+        Loader
+    },
     data () {
         return {
             loading: true,
@@ -56,44 +66,50 @@ export default Vue.extend({
         }
     },
 
-    head() {
+    head () {
         return {
             title: `${this.roms.data.platform} - Game Explorer`
         }
     },
 
     created () {
-        if ( !localStorage.getItem('view') ) {
-            this.view = 'Grid';
-            localStorage.setItem('view', 'Grid');
+        if (!localStorage.getItem('view')) {
+            this.view = 'Grid'
+            localStorage.setItem('view', 'Grid')
         }
-        this.view = localStorage.getItem('view');
+        this.view = localStorage.getItem('view')
         this.collect(this.$route.params.name)
 
-        read(this.$route.params.name, this.roms.path[0]);
+        read(this.$route.params.name, this.roms.path[0])
     },
 
     methods: {
         setView (view) {
-            if ( view === 'Grid' || view === 'List') {
-                this.view = view;
-                localStorage.setItem('view', view);
+            if (view === 'Grid' || view === 'List') {
+                this.view = view
+                localStorage.setItem('view', view)
             }
         },
 
         collect (p) {
-            if ( this.roms.path !== null ) {
+            if (this.roms.path !== null) {
                 this.roms = platform(p)
             } else {
-                throw Error("Not Found");
+                throw Error('Not Found')
             }
             this.loading = false
 
         },
 
-        filter(name) {
-            let rom = name.split('(')[0];
-            return rom.toLowerCase();
+        filter (name) {
+            if (name.includes('(')) {
+                let rom = name.split('(')[0]
+                return rom.toLowerCase()
+            }
+            if (name.includes('.')) {
+                let rom = name.split('.')[0]
+                return rom.toLowerCase()
+            }
         }
     }
 })

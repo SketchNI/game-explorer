@@ -56,6 +56,7 @@ export default Vue.extend({
 <style scoped>
 .sidebar {
     @apply bg-gray-900 h-screen w-80 text-gray-300 shadow-lg px-4 py-8 overflow-y-auto;
+    background: url('/broken_noise.png') top left repeat;
 }
 
 #search {

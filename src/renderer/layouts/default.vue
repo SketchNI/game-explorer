@@ -5,7 +5,7 @@
                 <sidebar class="border-r border-black"/>
             </div>
 
-            <div class="bg-gray-800 flex-grow">
+            <div class="bg-gray-800 flex-grow main-wrapper">
                 <main class="main" id="main">
                     <div class="main-wrap flex flex-col">
                         <Nuxt/>
@@ -28,6 +28,10 @@ export default Vue.extend({
 </script>
 
 <style scoped>
+.main-wrapper {
+    background: url('/diagmonds.png') top left repeat;
+}
+
 .main {
     @apply h-screen text-gray-100;
 }

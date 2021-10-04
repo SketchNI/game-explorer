@@ -6,7 +6,7 @@
         <div v-else>
             <div v-if="!game_not_found">
                 <div v-if="grid" class="game-card block p-4">
-                    <div class="mb-4 -m-4 h-64 overflow-y-hidden rounded-t-lg">
+                    <div class="mb-4 -m-4 max-h-64 overflow-y-hidden rounded-t-lg">
                         <img :src="game.image_url" :alt="`${game.name} Box Art`" class="w-96 rounded-t-lg"/>
                     </div>
 
@@ -170,7 +170,7 @@ export default {
     methods: {
         getGame () {
             if (!localStorage.getItem(this.name_hash)) {
-                this.$axios.get(`https://gameexplorer.sketchni.codes/api/game/${this.game_name}`).then(res => {
+                this.$axios.get(`https://gameexplorer.sketchni.codes/api/game/${encodeURIComponent(this.game_name)}`).then(res => {
                     this.game = res.data
                     this.game.published = new Date(this.game.published).getFullYear()
 
