@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node .electron-nuxt/dev.js",
     "build": "node .electron-nuxt/build.js",
+    "build-for-all": "node .electron-nuxt/build.js --win && node .electron-nuxt/build.js --mac && node .electron-nuxt/build.js --linux"
     "test:unit": "cross-env NODE_ENV=test TEST_TYPE=unit ava",
     "test:e2e": "cross-env NODE_ENV=test TEST_TYPE=e2e ava",
     "test": "yarn run test:unit && yarn run test:e2e",
